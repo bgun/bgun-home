@@ -9,5 +9,5 @@ server.get('/', function(request, response) {
 })
 
 server.listen(server.get('port'), function() {
-  console.log("bgun app is running at localhost:" + app.get('port'))
+  console.log("bgun app is running at localhost:" + server.get('port'))
 })
