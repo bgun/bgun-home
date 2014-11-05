@@ -18,5 +18,9 @@
   "homepage": "https://github.com/bgun/bgun-home",
   "dependencies": {
     "express": "^4.10.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.10",
+    "gulp-concat": "^2.4.1"
   }
 }
