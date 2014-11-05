@@ -8,6 +8,6 @@ server.get('/', function(request, response) {
   response.send('bgun.me')
 })
 
-server.listen(app.get('port'), function() {
+server.listen(server.get('port'), function() {
   console.log("bgun app is running at localhost:" + app.get('port'))
 })
