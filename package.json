@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "description": "My personal website",
   "main": "index.js",
+  "engines": {
+    "node": "0.10.x"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
