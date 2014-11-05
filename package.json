@@ -21,7 +21,8 @@
   },
   "homepage": "https://github.com/bgun/bgun-home",
   "dependencies": {
-    "express": "^4.10.1"
+    "express": "^4.10.1",
+    "underscore": "^1.7.0"
   },
   "devDependencies": {
     "gulp": "^3.8.10",

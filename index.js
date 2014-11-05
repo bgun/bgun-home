@@ -1,11 +1,16 @@
+var _       = require('underscore');
+var fs      = require('fs');
 var express = require('express');
 var server  = express();
+
 
 server.set('port', (process.env.PORT || 5000))
 server.use(express.static(__dirname + '/public'))
 
+var tmpl = fs.readFileSync('templates/home.tmpl.html');
+
 server.get('/', function(request, response) {
-  response.send('bgun.me')
+  response.send(tmpl)
 })
 
 server.listen(server.get('port'), function() {
