@@ -6,4 +6,5 @@ server.get('/', function(req, res) {
   res.send("bgun.me");
 });
 
+console.log("Listening on port "+port);
 server.listen(port);
