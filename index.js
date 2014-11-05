@@ -1,14 +1,13 @@
 var express = require('express');
 var server  = express();
-var port    = process.env.PORT || 5001;
 
-server.get('/', function(req, res) {
-  res.send("bgun.me");
-});
-// wildcard catching all non-matched requests
-server.get('*', function(req, res) {
-  res.send(404, "<h1>四零四</h1>");
-});
+server.set('port', (process.env.PORT || 5000))
+server.use(express.static(__dirname + '/public'))
 
-console.log("Listening on port "+port);
-server.listen(port);
+server.get('/', function(request, response) {
+  response.send('bgun.me')
+})
+
+server.listen(app.get('port'), function() {
+  console.log("bgun app is running at localhost:" + app.get('port'))
+})
