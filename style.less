@@ -3,7 +3,7 @@
 }
 
 html, body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 10px;
   height: 100%;
   margin: 0;
@@ -28,13 +28,14 @@ h1.title .firstname {
 .side {
   height: 100%;
   width: 50%;
-}
-.side.left {
-  border-right: 1px solid rgba(255,255,255,0.1);
-  float: left;
-}
-.side.right {
-  float: right;
+
+  &.left {
+    border-right: 1px solid rgba(255,255,255,0.1);
+    float: left;
+  }
+  &.right {
+    float: right;
+  }
 }
 .layout {
   max-width: 32rem;
@@ -51,20 +52,22 @@ h1.title .firstname {
   opacity: 0.9;
   padding: 0;
   text-align: right;
-}
-.links li {
-  display: inline-block;
-}
-.links a {
-  color: #EEE;
-  display: block;
-  font-size: 1.6rem;
-  font-weight: 300;
-  padding: 0.5em 0.2em;
-  text-decoration: none;
-}
-.links a:hover {
-  background: rgba(255,255,255,0.8);
-  border-radius: 2px;
-  color: #444;
+
+  li {
+    display: inline-block;
+  }
+  a {
+    color: #EEE;
+    display: block;
+    font-size: 1.6rem;
+    font-weight: 300;
+    padding: 0.5em 0.2em;
+    text-decoration: none;
+
+    &:hover {
+      background: rgba(255,255,255,0.8);
+      border-radius: 2px;
+      color: #444;
+    }
+  }
 }
