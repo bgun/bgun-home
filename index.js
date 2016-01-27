@@ -7,9 +7,8 @@ var server  = express();
 server.set('port', (process.env.PORT || 5000))
 server.use(express.static(__dirname + '/public'))
 
-var tmpl = fs.readFileSync('templates/home.tmpl.html', { encoding: 'UTF-8' });
-
 server.get('/', function(request, response) {
+  var tmpl = fs.readFileSync('templates/home.tmpl.html', { encoding: 'UTF-8' });
   response.send(tmpl)
 })
 
