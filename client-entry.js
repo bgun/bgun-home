@@ -4,6 +4,9 @@ var THREE = require('three');
 var ThreeStereoEffect = require('three-stereo-effect')(THREE);
 var ThreeDeviceOrientation = require('three.orientation');
 var ThreeOrbitControls = require('three-orbit-controls')(THREE);
+var ThreeObjLoader = require('three-obj-loader');
+ThreeObjLoader(THREE);
+global.THREE = THREE;
 
 // Paul Irish's requestAnimationFrame shim
 // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
@@ -17,13 +20,6 @@ window.requestAnimFrame = (function() {
       window.setTimeout(callback, 1000 / 60);
     };
 })();
-
-var game = {
-  entities: {
-    camera:  {},
-    scene:   {},
-  }
-};
 
 var camera, scene, renderer;
 var effect, controls;
@@ -86,28 +82,21 @@ var init = function() {
   scene.add(camera);
 
   controls = new ThreeOrbitControls(camera, element);
-  /*
-  controls.rotateUp(Math.PI / 4);
+  //controls.rotateUp(Math.PI / 4);
   controls.target.set(
     camera.position.x + 0.1,
     camera.position.y,
     camera.position.z
   );
-  controls.noZoom = true;
-  controls.noPan = true;
-  */
 
   function setOrientationControls(e) {
+    console.log(e);
     if (!e.alpha) {
       return;
     }
 
-    //controls = ThreeDeviceOrientation(camera);
-    //controls.connect();
-    //controls.update();
-
-    element.addEventListener('click', fullscreen, false);
-
+    controls = ThreeDeviceOrientation(camera);
+    controls.connect();
     window.removeEventListener('deviceorientation', setOrientationControls, true);
   }
 
@@ -116,12 +105,10 @@ var init = function() {
 
   setTimeout(resize, 1);
 
-  var texture = THREE.ImageUtils.loadTexture(
-    '/checker.png'
-  );
+  var texture = THREE.ImageUtils.loadTexture('/checker.png');
   texture.wrapS = THREE.RepeatWrapping;
   texture.wrapT = THREE.RepeatWrapping;
-  texture.repeat = new THREE.Vector2(50, 50);
+  texture.repeat = new THREE.Vector2(5, 5);
   texture.anisotropy = renderer.getMaxAnisotropy();
 
   var groundMaterial = new THREE.MeshPhongMaterial({
@@ -136,6 +123,8 @@ var init = function() {
     new THREE.PlaneGeometry(4000,4000,100,100),
     groundMaterial
   );
+
+  groundMaterial.needsUpdate = true;
 
   ground.rotation.x = -(90*(Math.PI/180));
   ground.position.setY(0);
@@ -155,8 +144,38 @@ var init = function() {
   scene.add(fillLight1);
   scene.add(fillLight2);
 
+
+
+  var onProgress = function ( xhr ) {
+    if ( xhr.lengthComputable ) {
+      var percentComplete = xhr.loaded / xhr.total * 100;
+      console.log( Math.round(percentComplete, 2) + '% downloaded' );
+    }
+  };
+
+  var onError = function ( xhr ) {};
+
+  var manager = new THREE.LoadingManager();
+  manager.onProgress = function ( item, loaded, total ) {
+    console.log( item, loaded, total );
+  };
+  var loader = new THREE.OBJLoader(manager);
+  loader.load( '/test.obj', function ( object ) {
+    object.traverse( function ( child ) {
+      if (child instanceof THREE.Mesh) {
+        child.material = groundMaterial;
+      }
+    });
+
+    object.position.y = 10;
+    scene.add(object);
+
+  }, onProgress, onError );
+
+
+
   // start animation
-  console.log("Initialized", game);
+  console.log("Initialized");
 };
 
 init();
