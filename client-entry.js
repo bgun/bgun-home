@@ -78,7 +78,7 @@ var init = function() {
   scene = new THREE.Scene();
 
   camera = new THREE.PerspectiveCamera(90, 1, 0.001, 2000);
-  camera.position.set(0, 20, 0);
+  camera.position.set(0, 80, 0);
   scene.add(camera);
 
   controls = new ThreeOrbitControls(camera, element);
@@ -161,9 +161,11 @@ var init = function() {
   };
   var loader = new THREE.OBJLoader(manager);
   loader.load( '/test.obj', function ( object ) {
-    object.traverse( function ( child ) {
+    object.traverse( function (child) {
+      console.log(child);
       if (child instanceof THREE.Mesh) {
-        child.material = groundMaterial;
+        //child.material.map = groundMaterial;
+        console.log(child.material);
       }
     });
 

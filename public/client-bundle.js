@@ -50,7 +50,7 @@
 	var ThreeStereoEffect = __webpack_require__(2)(THREE);
 	var ThreeDeviceOrientation = __webpack_require__(3);
 	var ThreeOrbitControls = __webpack_require__(4)(THREE);
-	var ThreeObjLoader = __webpack_require__(5);
+	var ThreeObjLoader = __webpack_require__(6);
 	ThreeObjLoader(THREE);
 	global.THREE = THREE;
 
@@ -124,7 +124,7 @@
 	  scene = new THREE.Scene();
 
 	  camera = new THREE.PerspectiveCamera(90, 1, 0.001, 2000);
-	  camera.position.set(0, 20, 0);
+	  camera.position.set(0, 80, 0);
 	  scene.add(camera);
 
 	  controls = new ThreeOrbitControls(camera, element);
@@ -207,9 +207,11 @@
 	  };
 	  var loader = new THREE.OBJLoader(manager);
 	  loader.load( '/test.obj', function ( object ) {
-	    object.traverse( function ( child ) {
+	    object.traverse( function (child) {
+	      console.log(child);
 	      if (child instanceof THREE.Mesh) {
-	        child.material = groundMaterial;
+	        //child.material.map = groundMaterial;
+	        console.log(child.material);
 	      }
 	    });
 
@@ -37809,7 +37811,8 @@
 
 
 /***/ },
-/* 5 */
+/* 5 */,
+/* 6 */
 /***/ function(module, exports) {
 
 	'use strict';
