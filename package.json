@@ -38,11 +38,9 @@
     "babel-core": "^6.4.5",
     "babel-loader": "^6.2.1",
     "css-loader": "^0.23.1",
-    "gulp": "^3.8.10",
-    "gulp-browserify": "^0.5.1",
-    "gulp-concat": "^2.4.1",
     "less": "^2.5.3",
     "less-loader": "^2.2.2",
+    "three-obj": "^0.6.2",
     "webpack": "^1.12.12"
   }
 }
