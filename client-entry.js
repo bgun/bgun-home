@@ -1,9 +1,9 @@
 'use strict';
 
 var THREE = require('three');
-var ThreeStereoEffect = require('three-stereo-effect');
+var ThreeStereoEffect = require('three-stereo-effect')(THREE);
 var ThreeDeviceOrientation = require('three.orientation');
-global.THREE = THREE;
+var ThreeOrbitControls = require('three-orbit-controls')(THREE);
 
 // Paul Irish's requestAnimationFrame shim
 // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
@@ -33,7 +33,6 @@ var clock = new THREE.Clock();
 
 function update(dt) {
   resize();
-  game.moveAll();
   camera.updateProjectionMatrix();
   controls.update(dt);
 }
@@ -86,7 +85,8 @@ var init = function() {
   camera.position.set(0, 20, 0);
   scene.add(camera);
 
-  controls = new THREE.OrbitControls(camera, element);
+  controls = new ThreeOrbitControls(camera, element);
+  /*
   controls.rotateUp(Math.PI / 4);
   controls.target.set(
     camera.position.x + 0.1,
@@ -95,15 +95,16 @@ var init = function() {
   );
   controls.noZoom = true;
   controls.noPan = true;
+  */
 
   function setOrientationControls(e) {
     if (!e.alpha) {
       return;
     }
 
-    controls = ThreeDeviceOrientation(camera);
+    //controls = ThreeDeviceOrientation(camera);
     //controls.connect();
-    controls.update();
+    //controls.update();
 
     element.addEventListener('click', fullscreen, false);
 
