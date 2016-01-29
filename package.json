@@ -26,6 +26,10 @@
     "express-hbs": "^0.8.4",
     "hbs": "^4.0.0",
     "less": "^2.5.3",
+    "three": "^0.73.2",
+    "three-orbit-controls": "^72.0.0",
+    "three-stereo-effect": "^1.0.13",
+    "three.orientation": "^1.1.0",
     "underscore": "^1.7.0"
   },
   "devDependencies": {
