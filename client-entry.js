@@ -35,7 +35,11 @@ function update(dt) {
 }
 
 function render(dt) {
-  effect.render(scene, camera);
+  if (effect) {
+    effect.render(scene, camera);
+  } else {
+    renderer.render(scene, camera);
+  }
 }
 
 function animate() {
@@ -64,7 +68,9 @@ function resize() {
   camera.updateProjectionMatrix();
 
   renderer.setSize(width, height);
-  effect.setSize(width, height);
+  if (effect) {
+    effect.setSize(width, height);
+  }
 }
 
 let init = function() {
@@ -75,6 +81,9 @@ let init = function() {
   container.appendChild(element);
 
   effect = new ThreeStereoEffect(renderer);
+  setTimeout(function() {
+    effect = null;
+  }, 5000);
 
   scene = new THREE.Scene();
 
@@ -198,6 +207,16 @@ let init = function() {
     object.scale.set(20,20,20);
     object.position.setY(10);
     scene.add(object);
+  });
+
+  var btnToggleSplit = document.getElementsByClassName('btn-toggle-split')[0];
+  btnToggleSplit.addEventListener('click', function(ev) {
+    ev.preventDefault();
+    if (effect) {
+      effect = null;
+    } else {
+      effect = new ThreeStereoEffect(renderer);
+    }
   });
 
   // start animation

@@ -46,10 +46,10 @@
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
 
-	var THREE = __webpack_require__(1);
-	var ThreeStereoEffect = __webpack_require__(2)(THREE);
-	var ThreeDeviceOrientation = __webpack_require__(3);
-	var ThreeOrbitControls = __webpack_require__(4)(THREE);
+	let THREE = __webpack_require__(1);
+	let ThreeStereoEffect = __webpack_require__(2)(THREE);
+	let ThreeDeviceOrientation = __webpack_require__(3);
+	let ThreeOrbitControls = __webpack_require__(4)(THREE);
 	//let ThreeObjLoader = require('three-obj-loader');
 	//let ObjMtlLoader = require();
 	//ThreeObjLoader(THREE);
@@ -57,21 +57,22 @@
 
 	// Paul Irish's requestAnimationFrame shim
 	// http://paulirish.com/2011/requestanimationframe-for-smart-animating/
-	window.requestAnimFrame = function () {
-	  return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (callback) {
-	    window.setTimeout(callback, 1000 / 60);
-	  };
-	}();
+	window.requestAnimFrame = (function() {
+	  return window.requestAnimationFrame ||
+	    window.webkitRequestAnimationFrame ||
+	    window.mozRequestAnimationFrame    ||
+	    window.oRequestAnimationFrame      ||
+	    window.msRequestAnimationFrame     ||
+	    function( callback ){
+	      window.setTimeout(callback, 1000 / 60);
+	    };
+	})();
 
-	var camera = undefined,
-	    scene = undefined,
-	    renderer = undefined;
-	var effect = undefined,
-	    controls = undefined;
-	var element = undefined,
-	    container = undefined;
+	let camera, scene, renderer;
+	let effect, controls;
+	let element, container;
 
-	var clock = new THREE.Clock();
+	let clock = new THREE.Clock();
 
 	function update(dt) {
 	  resize();
@@ -80,7 +81,11 @@
 	}
 
 	function render(dt) {
-	  effect.render(scene, camera);
+	  if (effect) {
+	    effect.render(scene, camera);
+	  } else {
+	    renderer.render(scene, camera);
+	  }
 	}
 
 	function animate() {
@@ -102,17 +107,19 @@
 	}
 
 	function resize() {
-	  var width = container.offsetWidth;
-	  var height = container.offsetHeight;
+	  let width = container.offsetWidth;
+	  let height = container.offsetHeight;
 
 	  camera.aspect = width / height;
 	  camera.updateProjectionMatrix();
 
 	  renderer.setSize(width, height);
-	  effect.setSize(width, height);
+	  if (effect) {
+	    effect.setSize(width, height);
+	  }
 	}
 
-	var init = function init() {
+	let init = function() {
 
 	  renderer = new THREE.WebGLRenderer({ antialias: true });
 	  element = renderer.domElement;
@@ -120,6 +127,9 @@
 	  container.appendChild(element);
 
 	  effect = new ThreeStereoEffect(renderer);
+	  setTimeout(function() {
+	    effect = null;
+	  }, 5000);
 
 	  scene = new THREE.Scene();
 
@@ -129,7 +139,11 @@
 
 	  controls = new ThreeOrbitControls(camera, element);
 	  //controls.rotateUp(Math.PI / 4);
-	  controls.target.set(camera.position.x + 0.1, camera.position.y, camera.position.z);
+	  controls.target.set(
+	    camera.position.x + 0.1,
+	    camera.position.y,
+	    camera.position.z
+	  );
 
 	  function setOrientationControls(e) {
 	    console.log(e);
@@ -147,13 +161,13 @@
 
 	  setTimeout(resize, 1);
 
-	  var texture = THREE.ImageUtils.loadTexture('/checker.png');
+	  let texture = THREE.ImageUtils.loadTexture('/checker.png');
 	  texture.wrapS = THREE.RepeatWrapping;
 	  texture.wrapT = THREE.RepeatWrapping;
 	  texture.repeat = new THREE.Vector2(5, 5);
 	  texture.anisotropy = renderer.getMaxAnisotropy();
 
-	  var groundMaterial = new THREE.MeshPhongMaterial({
+	  let groundMaterial = new THREE.MeshPhongMaterial({
 	    color: 0xffffff,
 	    specular: 0xffffff,
 	    shininess: 20,
@@ -161,7 +175,7 @@
 	    map: texture
 	  });
 
-	  var wireMaterial = new THREE.MeshLambertMaterial({
+	  let wireMaterial = new THREE.MeshLambertMaterial({
 	    color: 0x00FFFF,
 	    shading: THREE.FlatShading,
 	    side: THREE.DoubleSide
@@ -169,24 +183,30 @@
 	    //wireframeLinewidth: 2,
 	  });
 
-	  var dodec = new THREE.Mesh(new THREE.DodecahedronGeometry(2000, 1), wireMaterial);
-	  dodec.position.set(100, 100, 100);
+	  let dodec = new THREE.Mesh(
+	    new THREE.DodecahedronGeometry(2000, 1),
+	    wireMaterial
+	  );
+	  dodec.position.set(100,100,100);
 
-	  var ground = new THREE.Mesh(new THREE.PlaneGeometry(4000, 4000, 100, 100), groundMaterial);
+	  let ground = new THREE.Mesh(
+	    new THREE.PlaneGeometry(4000,4000,100,100),
+	    groundMaterial
+	  );
 
 	  groundMaterial.needsUpdate = true;
 
-	  ground.rotation.x = -(90 * (Math.PI / 180));
+	  ground.rotation.x = -(90*(Math.PI/180));
 	  ground.position.setY(0);
 	  ground.receiveShadow = true;
 
 	  // light the scene
-	  var keyLight = new THREE.SpotLight(0xffffff, 0.8);
-	  keyLight.position.set(500, 500, 500);
-	  var fillLight1 = new THREE.PointLight(0xff6666, 0.5);
-	  fillLight1.position.set(-1000, 300, 0);
-	  var fillLight2 = new THREE.PointLight(0xDDAA55, 0.3);
-	  fillLight2.position.set(1000, 300, -300);
+	  let keyLight = new THREE.SpotLight(0xffffff, 0.8);
+	  keyLight.position.set(500,500,500);
+	  let fillLight1 = new THREE.PointLight(0xff6666, 0.5);
+	  fillLight1.position.set(-1000,300,0);
+	  let fillLight2 = new THREE.PointLight(0xDDAA55, 0.3);
+	  fillLight2.position.set(1000,300,-300);
 
 	  // populate the scene
 	  scene.add(ground);
@@ -202,8 +222,10 @@
 	      console.log( Math.round(percentComplete, 2) + '% downloaded' );
 	    }
 	  };
-	   let onError = function ( xhr ) {};
-	   let manager = new THREE.LoadingManager();
+
+	  let onError = function ( xhr ) {};
+
+	  let manager = new THREE.LoadingManager();
 	  manager.onProgress = function ( item, loaded, total ) {
 	    console.log( item, loaded, total );
 	  };
@@ -226,11 +248,21 @@
 	  loader.load('/mesh/test.json', function (geometry, materials) {
 	    materials[0].shading = THREE.FlatShading;
 	    materials[1].shading = THREE.FlatShading;
-	    var material = new THREE.MeshFaceMaterial(materials);
-	    var object = new THREE.Mesh(geometry, material);
-	    object.scale.set(20, 20, 20);
+	    let material = new THREE.MeshFaceMaterial(materials);
+	    let object = new THREE.Mesh(geometry, material);
+	    object.scale.set(20,20,20);
 	    object.position.setY(10);
 	    scene.add(object);
+	  });
+
+	  var btnToggleSplit = document.getElementsByClassName('btn-toggle-split')[0];
+	  btnToggleSplit.addEventListener('click', function(ev) {
+	    ev.preventDefault();
+	    if (effect) {
+	      effect = null;
+	    } else {
+	      effect = new ThreeStereoEffect(renderer);
+	    }
 	  });
 
 	  // start animation
@@ -239,6 +271,7 @@
 
 	init();
 	animate();
+
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
