@@ -29,7 +29,6 @@ body {
 }
 
 #content {
-  display: none;
   position: fixed;
     left: 0;
     right: 0;
@@ -54,18 +53,31 @@ h1.title .firstname {
   letter-spacing: 0.3em;
 }
 
-.side {
+body.split .side {
   height: 100%;
   width: 50%;
 
   &.left {
-    border-right: 1px solid rgba(255,255,255,0.1);
+    display: block;
     float: left;
   }
   &.right {
+    display: block;
     float: right;
   }
 }
+.side {
+  &.left {
+    float: none;
+    margin: 0 auto;
+  }
+  &.right {
+    display: none;
+  }
+}
+
+
+
 .layout {
   max-width: 32rem;
   margin: 0 auto;

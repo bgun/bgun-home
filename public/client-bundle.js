@@ -126,10 +126,7 @@
 	  container = document.getElementById('canvas');
 	  container.appendChild(element);
 
-	  effect = new ThreeStereoEffect(renderer);
-	  setTimeout(function() {
-	    effect = null;
-	  }, 5000);
+	  //effect = new ThreeStereoEffect(renderer);
 
 	  scene = new THREE.Scene();
 
@@ -175,6 +172,7 @@
 	    map: texture
 	  });
 
+	  /*
 	  let wireMaterial = new THREE.MeshLambertMaterial({
 	    color: 0x00FFFF,
 	    shading: THREE.FlatShading,
@@ -188,6 +186,21 @@
 	    wireMaterial
 	  );
 	  dodec.position.set(100,100,100);
+	  */
+
+	  var skyboxTexture = THREE.ImageUtils.loadTexture('/eso0932a.jpg');
+	  skyboxTexture.wrapS = THREE.RepeatWrapping;
+	  skyboxTexture.wrapT = THREE.RepeatWrapping;
+	  skyboxTexture.repeat = new THREE.Vector2(2,2);
+
+	  let skybox = new THREE.Mesh(
+	    new THREE.SphereGeometry(1000,10,10),
+	    new THREE.MeshBasicMaterial({
+	      color: 0xffffff,
+	      map: skyboxTexture
+	    })
+	  );
+	  skybox.scale.set(-1,1,1);
 
 	  let ground = new THREE.Mesh(
 	    new THREE.PlaneGeometry(4000,4000,100,100),
@@ -210,7 +223,8 @@
 
 	  // populate the scene
 	  scene.add(ground);
-	  scene.add(dodec);
+	  scene.add(skybox);
+	  //scene.add(dodec);
 	  scene.add(keyLight);
 	  scene.add(fillLight1);
 	  scene.add(fillLight2);
@@ -260,8 +274,10 @@
 	    ev.preventDefault();
 	    if (effect) {
 	      effect = null;
+	      document.body.className = '';
 	    } else {
 	      effect = new ThreeStereoEffect(renderer);
+	      document.body.className = 'split';
 	    }
 	  });
 
