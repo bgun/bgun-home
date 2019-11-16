@@ -1,0 +1,31 @@
+html,body {
+  background: #F3F3F3;
+}
+
+.container {
+  color: #545;
+  margin-top: 100px;
+  text-align: center;
+}
+
+a {
+  color: #545;
+  text-decoration: none;
+}
+a:hover {
+  background: #545;
+  color: #FFF;
+}
+
+h1 {
+  font-family: 'Quicksand', sans-serif;
+}
+
+a.icon {
+  border-radius: 10px;
+  display: inline-block;
+  font-size: 30px;
+  line-height: 40px;
+  height: 40px;
+  width: 40px;
+}
