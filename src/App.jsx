@@ -36,14 +36,14 @@ function Point({ position, color = "red" }) {
   const [active, setActive] = useState(false);
 
   return (
-    <mesh 
-      position={position}
-      scale={active ? [1.5, 1.5, 1.5] : [1, 1, 1]}
-      onClick={() => setActive(!active)}
-      onPointerOver={() => setHovered(true)}
-      onPointerOut={() => setHovered(false)}
-    >
-      <sphereGeometry args={[0.03, 6, 6]} castShadow receiveShadow />
+    <mesh position={position}>
+      <sphereGeometry
+        args={[0.03, 6, 6]}
+        scale={active ? [1.5, 1.5, 1.5] : [1, 1, 1]}
+        onClick={() => setActive(!active)}
+        onPointerOver={() => setHovered(true)}
+        onPointerOut={() => setHovered(false)}  
+      />
       <meshStandardMaterial 
         color={hovered ? "orange" : color}
         emissive={color}
@@ -109,7 +109,7 @@ function App() {
     <>
       <Canvas style={{height: "600px"}}>
         <EffectComposer>
-          <Bloom luminanceThreshold={0.1} intensity={5} radius={2} />
+          <Bloom luminanceThreshold={0.1} intensity={1} radius={2} />
         </EffectComposer>
         <pointLight position={[0, 5, 0]} decay={0} intensity={5} castShadow />
         <Constellation position={[0, 0, 0]} />
