@@ -32,11 +32,20 @@ function Line({ startPoint, midPoint, endPoint, color = "blue" }) {
 
 // Component to visualize the points
 function Point({ position, color = "red" }) {
+  const [hovered, setHovered] = useState(false);
+  const [active, setActive] = useState(false);
+
   return (
-    <mesh position={position}>
+    <mesh 
+      position={position}
+      scale={active ? [1.5, 1.5, 1.5] : [1, 1, 1]}
+      onClick={() => setActive(!active)}
+      onPointerOver={() => setHovered(true)}
+      onPointerOut={() => setHovered(false)}
+    >
       <sphereGeometry args={[0.03, 6, 6]} castShadow receiveShadow />
       <meshStandardMaterial 
-        color={color}
+        color={hovered ? "orange" : color}
         emissive={color}
         emissiveIntensity={2}
         toneMapped={false}
@@ -56,7 +65,7 @@ function Constellation(props) {
   // Return view, these are regular three.js elements expressed in JSX
 
   const points = [];
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 20; i++) {
     points.push([
       Math.random() * 12 - 6, // x between -5 and 5
       Math.random() * 8 - 4, // y between -5 and 5 
@@ -73,7 +82,7 @@ function Constellation(props) {
       {points.map((point, index) => (
         <Point key={index} position={point} color="#AAAAAA" />
       ))}
-      {/* Line between the two points */}
+
       {/* Connect points with lines */}
       {points.map((point, index) => {
         if (index < points.length - 2) {
@@ -83,7 +92,7 @@ function Constellation(props) {
               startPoint={point}
               midPoint={points[index + 1]}
               endPoint={points[index + 2]}
-              color={`hsl(${(index / points.length) * 360}, 100%, 50%, 0.8)`} 
+              color={`hsl(${(index / points.length) * 360}, 100%, 50%)`} 
             />
           )
         }
@@ -100,20 +109,12 @@ function App() {
     <>
       <Canvas style={{height: "500px"}}>
         <EffectComposer>
-          <Bloom luminanceThreshold={0.1} intensity={2} radius={0.8} />
+          <Bloom luminanceThreshold={0.1} intensity={5} radius={2} />
         </EffectComposer>
         <pointLight position={[0, 5, 0]} decay={0} intensity={5} castShadow />
         <Constellation position={[0, 0, 0]} />
       </Canvas>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Ben Gundersen</h1>
+      <h1>Benjamin Gundersen</h1>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
