@@ -114,18 +114,12 @@ function App() {
         <pointLight position={[0, 5, 0]} decay={0} intensity={5} castShadow />
         <Constellation position={[0, 0, 0]} />
       </Canvas>
-      <h1>Benjamin Gundersen</h1>
+      <h1>Benjamin Gundersen asdf</h1>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
