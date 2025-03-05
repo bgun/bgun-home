@@ -25,7 +25,7 @@ function Line({ startPoint, midPoint, endPoint, color = "blue" }) {
         }),
         256, 0.005
       ]}/>
-      <meshBasicMaterial color={color} transparent={true} opacity={0.5} />
+      <meshBasicMaterial color={color} transparent={true} opacity={0.1} />
     </mesh>
   )
 }
@@ -58,9 +58,9 @@ function Constellation(props) {
   const points = [];
   for (let i = 0; i < 100; i++) {
     points.push([
-      Math.random() * 10 - 5, // x between -5 and 5
-      Math.random() * 10 - 5, // y between -5 and 5 
-      Math.random() * 10 - 5  // z between -5 and 5
+      Math.random() * 12 - 6, // x between -5 and 5
+      Math.random() * 8 - 4, // y between -5 and 5 
+      Math.random() * 12 - 6  // z between -5 and 5
     ]);
   }
 
@@ -83,7 +83,7 @@ function Constellation(props) {
               startPoint={point}
               midPoint={points[index + 1]}
               endPoint={points[index + 2]}
-              color={`hsla(${(index / points.length) * 360}, 100%, 50%, 0.8)`} 
+              color={`hsl(${(index / points.length) * 360}, 100%, 50%, 0.8)`} 
             />
           )
         }
