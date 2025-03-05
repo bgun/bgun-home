@@ -107,14 +107,14 @@ function App() {
 
   return (
     <>
-      <Canvas style={{height: "500px"}}>
+      <Canvas style={{height: "600px"}}>
         <EffectComposer>
           <Bloom luminanceThreshold={0.1} intensity={5} radius={2} />
         </EffectComposer>
         <pointLight position={[0, 5, 0]} decay={0} intensity={5} castShadow />
         <Constellation position={[0, 0, 0]} />
       </Canvas>
-      <h1>Benjamin Gundersen asdf</h1>
+      <h1>Benjamin Gundersen</h1>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
