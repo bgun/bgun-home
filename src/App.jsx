@@ -1,12 +1,28 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { createRoot } from 'react-dom/client'
 import { Canvas, useFrame } from '@react-three/fiber'
+import { PerspectiveCamera } from 'three';
 import { EffectComposer, Bloom } from '@react-three/postprocessing'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import { OrbitControls } from '@react-three/drei'
 import * as THREE from 'three'
 import './App.css'
+import perlinNoiseTexture from './perlinNoiseTexture'
+import ParticleCloud from './particleCloud'
+
+
+const NUM_PLANETS = 20;
+const PLANETS = [];
+for (let i = 0; i < NUM_PLANETS; i++) {
+  PLANETS.push({
+    position: [
+      Math.random() * 12 - 6, // x between -5 and 5
+      Math.random() * 6 - 3, // y between -5 and 5 
+      Math.random() * 12 - 6  // z between -5 and 5
+    ],
+    size: Math.random() * 0.2 + 0.1
+  });
+}
+
 
 // Component that creates the line between two points
 function Line({ startPoint, midPoint, endPoint, color = "blue" }) {
@@ -15,40 +31,66 @@ function Line({ startPoint, midPoint, endPoint, color = "blue" }) {
     new THREE.Vector3(...midPoint),
     new THREE.Vector3(...endPoint)
   ]
-    
+  const tubeSegments = 256;
+  const tubeRadius = 0.001;
+  const opacity = 0.5;
+   
   return (
     <mesh>
       <tubeGeometry args={[new THREE.CatmullRomCurve3(points, {
-          closed: false,
+          closed: true,
           curveType: THREE.CatmullRomCurve3,
-          tension: 0.5
+          tension: 0.9
         }),
-        256, 0.005
+        tubeSegments,
+        tubeRadius
       ]}/>
-      <meshBasicMaterial color={color} transparent={true} opacity={0.1} />
+      <meshBasicMaterial color={color} transparent={true} opacity={opacity} />
     </mesh>
   )
 }
 
 // Component to visualize the points
-function Point({ position, color = "red" }) {
+function Point({ position, color = "red", size = 0.1, handlePointClick }) {
   const [hovered, setHovered] = useState(false);
   const [active, setActive] = useState(false);
+  
+  // Create perlin noise texture
+  const [noiseTexture] = useState(() => perlinNoiseTexture());
+  noiseTexture.wrapS = noiseTexture.wrapT = THREE.RepeatWrapping;
+
+  if (hovered) {
+    size *= 1.2;
+    color = "orange";
+  } else if (active) {
+    size *= 1.25;
+    color = "orange";
+  }
 
   return (
-    <mesh position={position}>
+    <mesh 
+      position={position}
+      onPointerOver={() => setHovered(true)}
+      onPointerOut={() => setHovered(false)}
+      onClick={() => {
+        setActive(!active)
+        handlePointClick(active)
+      }}
+    >
       <sphereGeometry
-        args={[0.03, 6, 6]}
-        scale={active ? [1.5, 1.5, 1.5] : [1, 1, 1]}
-        onClick={() => setActive(!active)}
-        onPointerOver={() => setHovered(true)}
-        onPointerOut={() => setHovered(false)}  
+        args={[size, 32, 32]}
       />
       <meshStandardMaterial 
-        color={hovered ? "orange" : color}
+        color={color}
         emissive={color}
-        emissiveIntensity={2}
-        toneMapped={false}
+        emissiveIntensity={active ? 1 : 0}
+        transparent={true}
+        opacity={1}
+        map={noiseTexture}
+        bumpMap={noiseTexture}
+        bumpScale={0.05}
+        roughness={0.8}
+        metalness={0.2}
       />
     </mesh>
   )
@@ -64,35 +106,26 @@ function Constellation(props) {
   useFrame((state, delta) => (meshRef.current.rotation.y += (delta/5)))
   // Return view, these are regular three.js elements expressed in JSX
 
-  const points = [];
-  for (let i = 0; i < 20; i++) {
-    points.push([
-      Math.random() * 12 - 6, // x between -5 and 5
-      Math.random() * 8 - 4, // y between -5 and 5 
-      Math.random() * 12 - 6  // z between -5 and 5
-    ]);
-  }
-
   return (
     <group
       {...props}
       ref={meshRef}
     >
       {/* Stars */}
-      {points.map((point, index) => (
-        <Point key={index} position={point} color="#AAAAAA" />
+      {PLANETS.map((p, index) => (
+        <Point key={index} position={p.position} color="#AAAAAA" size={p.size} handlePointClick={props.handlePointClick} />
       ))}
 
       {/* Connect points with lines */}
-      {points.map((point, index) => {
-        if (index < points.length - 2) {
+      {PLANETS.map((p, index) => {
+        if (index < PLANETS.length - 2) {
           return (
             <Line 
               key={`line-${index}`}
-              startPoint={point}
-              midPoint={points[index + 1]}
-              endPoint={points[index + 2]}
-              color={`hsl(${(index / points.length) * 360}, 100%, 50%)`} 
+              startPoint={PLANETS[index].position}
+              midPoint={PLANETS[index + 1].position}
+              endPoint={PLANETS[index + 2].position}
+              color={`hsl(${(index / PLANETS.length) * 360}, 100%, 50%)`} 
             />
           )
         }
@@ -103,22 +136,133 @@ function Constellation(props) {
 }
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [currentScore, setCurrentScore] = useState(0)
+  const handlePointClick = (isActive) => {
+    setCurrentScore(prev => isActive ? prev - 1 : prev + 1)
+  }
+
+  const [zoomPosition, setZoomPosition] = useState(4);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setZoomPosition(prev => Math.min(prev + 0.001, 8));
+    }, 16); // ~60fps
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const [particleCloudProps, setParticleCloudProps] = useState({
+    green: {
+      rotationSpeed: 0.1,
+      rotationDirection: [1, 1, 1],
+      particleSize: 0.01,
+      cloudSize: 4,
+      particleCount: 100,
+      particleColor: "#00CCAA"
+    },
+    white: {
+      rotationSpeed: 0.1,
+      rotationDirection: [-1, -1, -1],
+      particleSize: 0.012,
+      cloudSize: 5,
+      particleCount: 300,
+      particleColor: "#FFFFFF"
+    },
+    red: {
+      rotationSpeed: 0.1,
+      rotationDirection: [1, 1, 1],
+      particleSize: 0.008,
+      cloudSize: 4,
+      particleCount: 200,
+      particleColor: "#FFAA00"
+    }
+  })
 
   return (
     <>
-      <Canvas style={{height: "600px"}}>
+      <Canvas
+        className="canvas"
+        style={{position: "absolute", top: 0, width: "100%", height: "90%"}}
+        camera={{
+          position: [0, 0, zoomPosition],
+          fov: 55,
+          near: 0.1,
+          far: 1000
+        }}
+      >
         <EffectComposer>
-          <Bloom luminanceThreshold={0.1} intensity={1} radius={2} />
+          <Bloom
+            intensity={1.5}
+            luminanceThreshold={0.1}
+            luminanceSmoothing={0.9}
+            height={300}
+          />
         </EffectComposer>
-        <pointLight position={[0, 5, 0]} decay={0} intensity={5} castShadow />
-        <Constellation position={[0, 0, 0]} />
+        <ambientLight color="#00AAFF" intensity={0.7} />
+        <pointLight position={[10, 5, 5]} decay={0} intensity={20} castShadow />
+        <Constellation position={[0, 0, 0]} handlePointClick={handlePointClick} />
+        <ParticleCloud {...particleCloudProps.green} />
+        <ParticleCloud {...particleCloudProps.white} />
+        <ParticleCloud {...particleCloudProps.red} />
       </Canvas>
-      <h1>Benjamin Gundersen</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+      <h1 className="title">Ben Gundersen</h1>
+      { currentScore > 0 && <h2 className="score">{ currentScore } / { NUM_PLANETS }</h2> }
+      { currentScore == NUM_PLANETS && (
+        <div className="a-winner-is-you">
+          <h2>+1 dopamine for you!</h2>
+          <button onClick={() => setCurrentScore(0)} className="close-button">Yay!</button>
+        </div>
+      )}
+
+      <div className="content-container">
+      { /*}
+        <div className="content">
+          <div className="flex-card">
+            <div className="flex-card-container">
+              <div className="card-image"></div>
+              <div className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+            </div>
+          </div>
+          <div className="flex-card">
+            <div className="flex-card-container">
+              <div className="card-image"></div>
+              <div className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+            </div>
+          </div>
+          <div className="flex-card">
+            <div className="flex-card-container">
+              <div className="card-image"></div>
+              <div className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+            </div>
+          </div>
+          <div className="flex-card">
+            <div className="flex-card-container">
+              <div className="card-image"></div>
+              <div className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+            </div>
+          </div>
+          <div className="flex-card">
+            <div className="flex-card-container">
+              <div className="card-image"></div>
+              <div className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+            </div>
+          </div>
+          <div className="flex-card">
+            <div className="flex-card-container">
+              <div className="card-image"></div>
+              <div className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+            </div>
+          </div>
+        </div>
+              */}
+        <footer>
+          <div className="footer-links">            
+            <a href="https://bgun.github.io"><img src="/github.svg" alt="github" /></a>
+          </div>
+          <div className="footer-info">
+            <a href="tel:+19187607778">918-760-7778</a><br />
+            <a href="mailto:ben@bengundersen.com">ben@bengundersen.com</a>
+          </div>
+        </footer>
       </div>
     </>
   )
