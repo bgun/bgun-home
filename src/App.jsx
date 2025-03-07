@@ -218,8 +218,8 @@ function App() {
         <span className="title-name">Ben Gundersen</span>
         <span className="title-subtitle fade1">Technical Product Manager</span>
         <span className="title-subtitle fade2">Engineering Leadership</span>
-        <span className="title-subtitle fade3"><a href="mailto:ben@bengundersen.com">ben@bengundersen.com</a></span>
-        <span className="title-subtitle fade4"><a href="tel:+19187607778">+1 918 760 7778</a></span>
+        <span className="title-subtitle fade3">ben@bengundersen.com</span>
+        <span className="title-subtitle fade4">+1 918 760 7778</span>
       </h1>
 
       { currentScore > 0 && <h2 className="score">{ currentScore } / { NUM_PLANETS }</h2> }

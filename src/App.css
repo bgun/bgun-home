@@ -34,6 +34,7 @@
   text-align: left;
   text-transform: uppercase;
   letter-spacing: -1px;
+  pointer-events: none;
 }
 .title .title-subtitle {
   font-family:'Roboto', sans-serif;
@@ -45,6 +46,7 @@
   width: 300px;
   text-align: left;
   letter-spacing: -1px;
+  pointer-events: none;
 }
 .title .title-subtitle a {
   color: white;
