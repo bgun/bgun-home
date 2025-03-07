@@ -16,14 +16,12 @@ for (let i = 0; i < NUM_PLANETS; i++) {
   PLANETS.push({
     position: [
       Math.random() * 12 - 6, // x between -5 and 5
-      Math.random() * 10 - 5, // y between -5 and 5 
-      Math.random() * 10 - 5  // z between -5 and 5
+      Math.random() * 6 - 3, // y between -5 and 5 
+      Math.random() * 6 - 3  // z between -5 and 5
     ],
     size: Math.random() * 0.15 + 0.05
   });
 }
-
-let zoomPosition = 3;
 
 // Component that creates the line between two points
 function Line({ startPoint, midPoint, endPoint, color = "blue" }) {
@@ -73,9 +71,10 @@ function Point({ position, color = "red", size = 0.1, handlePointClick }) {
       position={position}
       onPointerOver={() => setHovered(true)}
       onPointerOut={() => setHovered(false)}
-      onPointerDown={() => {
-        setActive(!active)
-        handlePointClick(active)
+      onPointerDown={(e) => {
+        e.stopPropagation();
+        setActive(!active);
+        handlePointClick(active);
       }}
     >
       <sphereGeometry
@@ -147,7 +146,7 @@ function App() {
       rotationSpeed: 0.1,
       rotationDirection: [1, 1, 1],
       particleSize: 0.01,
-      cloudSize: 4,
+      cloudSize: 6,
       particleCount: 100,
       particleColor: "#00CCAA"
     },
@@ -155,7 +154,7 @@ function App() {
       rotationSpeed: 0.1,
       rotationDirection: [-1, -1, -1],
       particleSize: 0.012,
-      cloudSize: 5,
+      cloudSize: 8,
       particleCount: 300,
       particleColor: "#FFFFFF"
     },
@@ -163,7 +162,7 @@ function App() {
       rotationSpeed: 0.1,
       rotationDirection: [1, 1, 1],
       particleSize: 0.008,
-      cloudSize: 4,
+      cloudSize: 5,
       particleCount: 200,
       particleColor: "#FFAA00"
     }
@@ -177,8 +176,8 @@ function App() {
       // Slowly increase z position (zooming out)
       camera.position.z += delta * 0.1;
       // Optional: limit how far it can zoom out
-      if (camera.position.z > 12) {
-        camera.position.z = 12
+      if (camera.position.z > 15) {
+        camera.position.z = 15
       }
     })
 
@@ -191,8 +190,8 @@ function App() {
         className="canvas"
         style={{position: "absolute", top: 0, width: "100%", height: "90%"}}
         camera={{
-          position: [0, 0, 3],
-          fov: 55,
+          position: [0, 0, 5],
+          fov: 25,
           near: 0.1,
           far: 1000
         }}
@@ -218,8 +217,7 @@ function App() {
         <span className="title-name">Ben Gundersen</span>
         <span className="title-subtitle fade1">Technical Product Manager</span>
         <span className="title-subtitle fade2">Engineering Leadership</span>
-        <span className="title-subtitle fade3">ben@bengundersen.com</span>
-        <span className="title-subtitle fade4">+1 918 760 7778</span>
+        <span className="title-subtitle fade3">Web Generalist</span>
       </h1>
 
       { currentScore > 0 && <h2 className="score">{ currentScore } / { NUM_PLANETS }</h2> }
