@@ -177,8 +177,8 @@ function App() {
       // Slowly increase z position (zooming out)
       camera.position.z += delta * 0.1;
       // Optional: limit how far it can zoom out
-      if (camera.position.z > 6) {
-        camera.position.z = 6
+      if (camera.position.z > 12) {
+        camera.position.z = 12
       }
     })
 
