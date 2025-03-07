@@ -41,7 +41,7 @@ function ParticleCloud({
       <group ref={meshRef}>
         {particles.map((particle, i) => (
           <mesh key={i} position={particle.position}>
-            <sphereGeometry args={[particle.size, 6, 6]} />
+            <tetrahedronGeometry args={[particle.size, 0]} />
             <meshBasicMaterial color={particleColor} transparent opacity={0.6} />
           </mesh>
         ))}

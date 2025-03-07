@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { createRoot } from 'react-dom/client'
-import { Canvas, useFrame } from '@react-three/fiber'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { PerspectiveCamera } from 'three';
 import { EffectComposer, Bloom } from '@react-three/postprocessing'
 import { OrbitControls } from '@react-three/drei'
@@ -16,13 +16,14 @@ for (let i = 0; i < NUM_PLANETS; i++) {
   PLANETS.push({
     position: [
       Math.random() * 12 - 6, // x between -5 and 5
-      Math.random() * 6 - 3, // y between -5 and 5 
-      Math.random() * 12 - 6  // z between -5 and 5
+      Math.random() * 10 - 5, // y between -5 and 5 
+      Math.random() * 10 - 5  // z between -5 and 5
     ],
-    size: Math.random() * 0.2 + 0.1
+    size: Math.random() * 0.15 + 0.05
   });
 }
 
+let zoomPosition = 3;
 
 // Component that creates the line between two points
 function Line({ startPoint, midPoint, endPoint, color = "blue" }) {
@@ -57,7 +58,7 @@ function Point({ position, color = "red", size = 0.1, handlePointClick }) {
   
   // Create perlin noise texture
   const [noiseTexture] = useState(() => perlinNoiseTexture());
-  noiseTexture.wrapS = noiseTexture.wrapT = THREE.RepeatWrapping;
+  noiseTexture.wrapS = noiseTexture.wrapT = THREE.MirrorWrapping;
 
   if (hovered) {
     size *= 1.2;
@@ -72,7 +73,7 @@ function Point({ position, color = "red", size = 0.1, handlePointClick }) {
       position={position}
       onPointerOver={() => setHovered(true)}
       onPointerOut={() => setHovered(false)}
-      onClick={() => {
+      onPointerDown={() => {
         setActive(!active)
         handlePointClick(active)
       }}
@@ -141,15 +142,6 @@ function App() {
     setCurrentScore(prev => isActive ? prev - 1 : prev + 1)
   }
 
-  const [zoomPosition, setZoomPosition] = useState(4);
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setZoomPosition(prev => Math.min(prev + 0.001, 8));
-    }, 16); // ~60fps
-
-    return () => clearInterval(interval);
-  }, []);
-
   const [particleCloudProps, setParticleCloudProps] = useState({
     green: {
       rotationSpeed: 0.1,
@@ -177,18 +169,35 @@ function App() {
     }
   })
 
+  // Create a new camera controller component
+  function CameraController() {
+    const { camera } = useThree()  // Get the camera from Three.js context
+    
+    useFrame((state, delta) => {
+      // Slowly increase z position (zooming out)
+      camera.position.z += delta * 0.1;
+      // Optional: limit how far it can zoom out
+      if (camera.position.z > 6) {
+        camera.position.z = 6
+      }
+    })
+
+    return null  // This component doesn't render anything
+  }
+
   return (
     <>
       <Canvas
         className="canvas"
         style={{position: "absolute", top: 0, width: "100%", height: "90%"}}
         camera={{
-          position: [0, 0, zoomPosition],
+          position: [0, 0, 3],
           fov: 55,
           near: 0.1,
           far: 1000
         }}
       >
+        <CameraController />
         <EffectComposer>
           <Bloom
             intensity={1.5}
@@ -204,7 +213,14 @@ function App() {
         <ParticleCloud {...particleCloudProps.white} />
         <ParticleCloud {...particleCloudProps.red} />
       </Canvas>
-      <h1 className="title">Ben Gundersen</h1>
+
+      <h1 className="title">
+        <span className="title-name">Ben Gundersen</span>
+        <span className="title-subtitle fade1">Engineering Manager</span>
+        <span className="title-subtitle fade2">Engineering Manager</span>
+        <span className="title-subtitle fade3">Engineering Manager</span>
+      </h1>
+
       { currentScore > 0 && <h2 className="score">{ currentScore } / { NUM_PLANETS }</h2> }
       { currentScore == NUM_PLANETS && (
         <div className="a-winner-is-you">
