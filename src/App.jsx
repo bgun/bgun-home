@@ -216,9 +216,10 @@ function App() {
 
       <h1 className="title">
         <span className="title-name">Ben Gundersen</span>
-        <span className="title-subtitle fade1">Engineering Manager</span>
-        <span className="title-subtitle fade2">Engineering Manager</span>
-        <span className="title-subtitle fade3">Engineering Manager</span>
+        <span className="title-subtitle fade1">Technical Product Manager</span>
+        <span className="title-subtitle fade2">Engineering Leadership</span>
+        <span className="title-subtitle fade3"><a href="mailto:ben@bengundersen.com">ben@bengundersen.com</a></span>
+        <span className="title-subtitle fade4"><a href="tel:+19187607778">+1 918 760 7778</a></span>
       </h1>
 
       { currentScore > 0 && <h2 className="score">{ currentScore } / { NUM_PLANETS }</h2> }
@@ -272,7 +273,8 @@ function App() {
               */}
         <footer>
           <div className="footer-links">            
-            <a href="https://bgun.github.io"><img src="/github.svg" alt="github" /></a>
+            <a href="https://github.com/bgun"><img src="/github.svg" alt="github" /></a>
+            <a href="https://bgun.substack.com"><img src="/substack.png" alt="substack" /></a>
           </div>
           <div className="footer-info">
             <a href="tel:+19187607778">918-760-7778</a><br />

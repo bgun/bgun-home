@@ -29,7 +29,7 @@
   font-weight: 500;
   font-size: 50px;
   display: block;
-  margin-bottom: 0px;
+  margin-bottom: 10px;
   width: 300px;
   text-align: left;
   text-transform: uppercase;
@@ -37,14 +37,25 @@
 }
 .title .title-subtitle {
   font-family:'Roboto', sans-serif;
-  font-weight: 300;
+  font-weight: 200;
   font-size: 24px;
   display: block;
   opacity: 0.8;
+  line-height: 40px;
   width: 300px;
   text-align: left;
   letter-spacing: -1px;
 }
+.title .title-subtitle a {
+  color: white;
+  text-decoration: none;
+  font-style: italic;
+  font-weight: 300;
+}
+.title .title-subtitle a:hover {
+  color: #8AF;
+}
+
 .title .title-subtitle.fade1 {
   animation: fadeIn 1s ease-in forwards;
   animation-delay: 1s;
@@ -52,12 +63,17 @@
 }
 .title .title-subtitle.fade2 {
   animation: fadeIn 1s ease-in forwards;
-  animation-delay: 2s;
+  animation-delay: 1.5s;
   opacity: 0;
 }
 .title .title-subtitle.fade3 {
   animation: fadeIn 1s ease-in forwards;
-  animation-delay: 3s;
+  animation-delay: 2s;
+  opacity: 0;
+}
+.title .title-subtitle.fade4 {
+  animation: fadeIn 1s ease-in forwards;
+  animation-delay: 2.5s;
   opacity: 0;
 }
 
@@ -122,8 +138,8 @@
 }
 
 .content-container {
-  box-shadow: inset 0 15px 15px rgba(0, 0, 0, 0.3);
-  background: #234;
+  box-shadow: inset 0 8px 8px rgba(0, 0, 0, 0.2);
+  background: #345;
   position: absolute;
   top: 90%;
   width: 100%;
@@ -192,7 +208,7 @@ footer {
   color: #FFFA;
 }
 .footer-info a:hover {
-  color: #A0F;
+  color: #8AF;
 }
 
 @keyframes logo-spin {
