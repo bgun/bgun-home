@@ -7,7 +7,10 @@ function ParticleCloud({
     particleSize = 0.2,
     cloudSize = 4,
     particleCount = 100,
-    particleColor = "#FFFFFF"
+    particleColor = "#FFFFFF",
+    widthSegments = 1,
+    heightSegments = 1,
+    particleOpacity = 1
   }) {
     const meshRef = useRef()
     const [particles] = useState(() => {
@@ -41,8 +44,8 @@ function ParticleCloud({
       <group ref={meshRef}>
         {particles.map((particle, i) => (
           <mesh key={i} position={particle.position}>
-            <tetrahedronGeometry args={[particle.size, 0]} />
-            <meshBasicMaterial color={particleColor} transparent opacity={0.6} />
+            <sphereGeometry args={[particle.size, widthSegments, heightSegments]} />
+            <meshBasicMaterial color={particleColor} transparent opacity={particleOpacity} />
           </mesh>
         ))}
       </group>

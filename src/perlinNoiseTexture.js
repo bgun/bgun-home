@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-const perlinNoiseTexture = () => {
+const perlinNoiseTexture = (color1 = [0, 0, 0], color2 = [255, 255, 255]) => {
     const size = 256;
     const canvas = document.createElement('canvas');
     canvas.width = size;
@@ -52,10 +52,9 @@ const perlinNoiseTexture = () => {
       for (let x = 0; x < size; x++) {
         const i = (y * size + x) * 4;
         const value = (noise2D(x / scale, y / scale) + 1) * 0.5;
-        const noise = value * 255;
-        data[i] = noise/1.5;     // red
-        data[i+1] = noise/1.5;   // green 
-        data[i+2] = noise;   // blue
+        data[i] = lerp(value, color1[0], color2[0]);     // red
+        data[i+1] = lerp(value, color1[1], color2[1]);   // green 
+        data[i+2] = lerp(value, color1[2], color2[2]);   // blue
         data[i+3] = 255;     // alpha
       }
     }
