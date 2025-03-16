@@ -2,6 +2,8 @@ import React, { useRef, useState } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { PerspectiveCamera } from 'three';
 import { EffectComposer, Bloom } from '@react-three/postprocessing'
+import { useControls } from 'leva'
+import FakeGlowMaterial from './FakeGlowMaterial'
 import { OrbitControls } from '@react-three/drei'
 import * as THREE from 'three'
 import perlinNoiseTexture from './perlinNoiseTexture'
@@ -13,9 +15,9 @@ const PLANETS = [];
 for (let i = 0; i < NUM_PLANETS; i++) {
   PLANETS.push({
     position: [
-      Math.random() * 12 - 6, // x between -5 and 5
-      Math.random() * 6 - 3, // y between -5 and 5 
-      Math.random() * 6 - 3  // z between -5 and 5
+      (Math.random() < 0.5 ? Math.random() * -5 - 1 : Math.random() * 5 + 1), // x between -6 to -1 or 1 to 6
+      (Math.random() < 0.5 ? Math.random() * -3 - 1 : Math.random() * 3 + 1), // y between -4 to -1 or 1 to 4
+      (Math.random() < 0.5 ? Math.random() * -3 - 1 : Math.random() * 3 + 1), // z between -4 to -1 or 1 to 4
     ],
     size: Math.random() * 0.15 + 0.05
   });
@@ -47,14 +49,13 @@ function Line({ startPoint, midPoint, endPoint, color = "blue" }) {
   )
 }
 
-// Component to visualize the points
-function Point({ position, color = "red", size = 0.1, handlePointClick }) {
+function Planet({ position, color = "red", size = 0.1, handlePointClick }) {
   const [hovered, setHovered] = useState(false);
   const [active, setActive] = useState(false);
   
   // Create perlin noise texture
   const [noiseTexture] = useState(() => perlinNoiseTexture());
-  noiseTexture.wrapS = noiseTexture.wrapT = THREE.MirrorWrapping;
+  noiseTexture.wrapS = noiseTexture.wrapT = THREE.MirroredRepeatWrapping
 
   if (hovered) {
     size *= 1.2;
@@ -81,7 +82,7 @@ function Point({ position, color = "red", size = 0.1, handlePointClick }) {
       <meshStandardMaterial 
         color={color}
         emissive={color}
-        emissiveIntensity={active ? 0.5 : 0}
+        emissiveIntensity={active ? 0.4 : 0}
         transparent={true}
         opacity={1}
         map={noiseTexture}
@@ -107,17 +108,27 @@ function CameraController() {
 }
 
 function Sun() {
-  const [noiseTexture] = useState(() => perlinNoiseTexture([255, 100, 0], [255, 255, 100]));
-  noiseTexture.wrapS = noiseTexture.wrapT = THREE.MirrorWrapping;
+  const [noiseTexture] = useState(() => perlinNoiseTexture([100, 50, 0], [255, 255, 255]));
+  //noiseTexture.wrapS = noiseTexture.wrapT = THREE.MirrorWrapping;
 
   const meshRef = useRef()
   useFrame((state, delta) => {
-    meshRef.current.material.emissiveIntensity = 1.5 + Math.sin(state.clock.elapsedTime * 0.5)
+    meshRef.current.material.emissiveIntensity = 2 + Math.sin(state.clock.elapsedTime * 0.5)
   })
+
+  const glowControls = {
+    falloff: 0.9,
+    glowInternalRadius: 2,
+    glowColor: "#FF6633",
+    glowSharpness: 0.2,
+    side: THREE.FrontSide,
+    opacity: 0.5,
+    depthTest: false,
+  };
 
   return (
     <mesh ref={meshRef}>
-      <sphereGeometry args={[0.5, 32, 32]} />
+      <sphereGeometry args={[0.5, 64, 64]} />
       <meshStandardMaterial 
         color="#FFD700"
         emissive="#FFD700"
@@ -127,6 +138,10 @@ function Sun() {
         map={noiseTexture}
       />
       <pointLight position={[0, 0, 0]} decay={0} intensity={7} castShadow color="#FFAA00" />
+      <mesh position={[0, 0, 0]}>
+        <sphereGeometry args={[0.53, 64, 64]} />
+        <FakeGlowMaterial {...glowControls} />
+      </mesh>
     </mesh>
   )
 }
@@ -148,7 +163,7 @@ function Planets(props) {
     >
       {/* Stars */}
       {PLANETS.map((p, index) => (
-        <Point key={index} position={p.position} color="#AAAAAA" size={p.size} handlePointClick={props.handlePointClick} />
+        <Planet key={index} position={p.position} color="#AAAAAA" size={p.size} handlePointClick={props.handlePointClick} />
       ))}
 
       {/* Connect points with lines */}
@@ -200,7 +215,7 @@ function ConstellationGame() {
       particleSize: 0.008,
       cloudSize: 5,
       particleCount: 200,
-      particleColor: "#FFAA00"
+      particleColor: "#8844AA"
     },
     yellow: {
       rotationSpeed: 0.3,
@@ -208,12 +223,20 @@ function ConstellationGame() {
       particleSize: 0.15,
       cloudSize: 0.35,
       particleCount: 500,
-      particleColor: "#FFFF00",
-      widthSegments: 5,
-      heightSegments: 5,
-      particleOpacity: 0.3
+      particleColor: "#FF4400",
+      widthSegments: 7,
+      heightSegments: 7,
+      particleOpacity: 0.1,
+      emissiveIntensity: 20
     }
   })
+
+  const bloomControls = {
+    intensity: 0.4,
+    luminanceThreshold: 0.4,
+    luminanceSmoothing: 0.9,
+    height: 800
+  }
 
   return (
     <div className="constellation-game">
@@ -229,14 +252,9 @@ function ConstellationGame() {
       >
         <CameraController />
         <EffectComposer>
-          <Bloom
-            intensity={1}
-            luminanceThreshold={0.1}
-            luminanceSmoothing={0.9}
-            height={300}
-          />
+          <Bloom {...bloomControls} />
         </EffectComposer>
-        <ambientLight color="#00AAFF" intensity={0.7} />
+        <ambientLight color="#0066FF" intensity={0.7} />
         <Sun />
         <Planets position={[0, 0, 0]} handlePointClick={handlePointClick} />
         <ParticleCloud {...particleCloudProps.green} />

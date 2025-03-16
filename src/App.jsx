@@ -16,7 +16,19 @@ function App() {
       </h1>
 
       <div className="content-container">
-      { /*}
+        <a className="push-down">&or;</a>
+        <footer>
+          <div className="footer-links">            
+            <a href="https://github.com/bgun"><img src="/github.svg" alt="github" /></a>
+            <a href="https://bgun.substack.com"><img src="/substack.png" alt="substack" /></a>
+          </div>
+          <div className="footer-info">
+            <a href="tel:+19187607778">918-760-7778</a><br />
+            <a href="mailto:ben@bengundersen.com">ben@bengundersen.com</a>
+          </div>
+        </footer>
+
+      { /* <div className="content-container"></div>
         <div className="content">
           <div className="flex-card">
             <div className="flex-card-container">
@@ -54,18 +66,10 @@ function App() {
               <div className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
             </div>
           </div>
+        </div>      */}
+        <div className="slide-to-open">
+          <div><h1>Work</h1></div>
         </div>
-              */}
-        <footer>
-          <div className="footer-links">            
-            <a href="https://github.com/bgun"><img src="/github.svg" alt="github" /></a>
-            <a href="https://bgun.substack.com"><img src="/substack.png" alt="substack" /></a>
-          </div>
-          <div className="footer-info">
-            <a href="tel:+19187607778">918-760-7778</a><br />
-            <a href="mailto:ben@bengundersen.com">ben@bengundersen.com</a>
-          </div>
-        </footer>
       </div>
     </>
   )

@@ -10,7 +10,8 @@ function ParticleCloud({
     particleColor = "#FFFFFF",
     widthSegments = 1,
     heightSegments = 1,
-    particleOpacity = 1
+    particleOpacity = 1,
+    emissiveIntensity = 0.5
   }) {
     const meshRef = useRef()
     const [particles] = useState(() => {
@@ -45,7 +46,13 @@ function ParticleCloud({
         {particles.map((particle, i) => (
           <mesh key={i} position={particle.position}>
             <sphereGeometry args={[particle.size, widthSegments, heightSegments]} />
-            <meshBasicMaterial color={particleColor} transparent opacity={particleOpacity} />
+            <meshStandardMaterial
+              color={particleColor}
+              transparent
+              opacity={particleOpacity}
+              emissive={particleColor}
+              emissiveIntensity={emissiveIntensity}
+            />
           </mesh>
         ))}
       </group>
