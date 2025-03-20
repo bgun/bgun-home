@@ -1,13 +1,13 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { createRoot } from 'react-dom/client'
 // import ConstellationGame from './ConstellationGame'
-import ConstellationGame from './ConstellationGame'
+import Neurons3D from './Neurons3D'
 import './App.css'
 
 function App() {
   return (
     <>
-      <ConstellationGame />
+      <Neurons3D />
       <h1 className="title">
         <span className="title-name">Ben Gundersen</span>
         <span className="title-subtitle fade1">Technical Product Manager</span>
