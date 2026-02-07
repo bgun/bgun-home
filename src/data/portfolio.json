@@ -12,62 +12,42 @@
   },
   "projects": [
     {
-      "id": "project-1",
-      "title": "E-Commerce Platform Redesign",
-      "description": "Led the redesign of a multi-million dollar e-commerce platform, improving conversion rates by 35% and reducing cart abandonment by 22%.",
-      "longDescription": "Comprehensive UX overhaul of legacy e-commerce system serving 500K+ monthly users. Implemented mobile-first design, streamlined checkout flow, and integrated modern payment solutions.",
+      "title": "Tripadvisor: Trust & Safety Technical Management",
+      "description": "Content moderation pipeline and tooling",
       "image": "/images/portfolio-tripadvisor.png",
-      "technologies": ["React", "Node.js", "PostgreSQL", "Stripe", "AWS"],
-      "links": {
-        "demo": "https://example.com",
-        "github": "https://github.com/bgun/ecommerce-platform"
-      },
-      "date": "2024-03",
-      "featured": true,
-      "category": "Product Management"
+      "skills": ["React", "Node.js", "PostgreSQL", "Stripe", "AWS"],
+      "link": "https://tripadvisor.com",
+      "date": "2024-03"
     },
     {
-      "id": "project-2",
+      "title": "Afterwork: Solving the Loneliness Epidemic",
+      "description": "Afterwork is a network of in-person gatherings, service opportunities and personal development strategies, all centered around the shared experience of midlife.",
+      "image": "/images/portfolio-afterwork.png",
+      "skills": ["Digital Marketing", "TensorFlow", "scikit-learn", "AWS Lambda", "Docker"],
+      "link": "https://wearelifeafterwork.com/ai-engine",
+      "date": "2022-08"
+    },
+    {
       "title": "Real-Time Collaboration Tool",
       "description": "Built a real-time collaboration platform for distributed teams, supporting 10,000+ concurrent users with sub-100ms latency.",
-      "longDescription": "WebSocket-based collaboration tool with operational transformation for conflict-free editing, presence indicators, and integrated video chat.",
-      "image": "/images/project-2.jpg",
-      "technologies": ["TypeScript", "WebSocket", "Redis", "Docker", "Kubernetes"],
-      "links": {
-        "demo": "https://example.com",
-        "github": "https://github.com/bgun/collab-tool"
-      },
-      "date": "2023-11",
-      "featured": true,
-      "category": "Engineering"
+      "image": "/images/portfolio-citymaps.png",
+      "skills": ["TypeScript", "WebSocket", "Redis", "Docker", "Kubernetes"],
+      "link": "https://example.com",
+      "date": "2023-11"
     },
     {
-      "id": "project-3",
       "title": "Data Visualization Dashboard",
       "description": "Created an interactive analytics dashboard processing 1M+ data points in real-time with custom D3.js visualizations.",
-      "longDescription": "Enterprise analytics platform with custom charting library, real-time data streaming, and export capabilities. Used by executive team for strategic decision-making.",
-      "image": "/images/project-3.jpg",
-      "technologies": ["React", "D3.js", "Python", "FastAPI", "MongoDB"],
-      "links": {
-        "demo": "https://example.com"
-      },
-      "date": "2023-06",
-      "featured": false,
-      "category": "Engineering"
+      "image": "/images/portfolio-ncaa.jpg",
+      "skills": ["React", "D3.js", "Python", "FastAPI", "MongoDB"],
+      "link": "https://example.com"
     },
     {
-      "id": "project-4",
       "title": "Mobile App UX Optimization",
       "description": "Redesigned mobile app experience resulting in 4.8 star rating (from 3.2) and 200% increase in daily active users.",
-      "longDescription": "Complete UX audit and redesign of iOS/Android apps. Conducted user research, A/B testing, and iterative prototyping to optimize user flows and reduce friction points.",
-      "image": "/images/project-4.jpg",
-      "technologies": ["React Native", "Figma", "Firebase", "GraphQL"],
-      "links": {
-        "github": "https://github.com/bgun/mobile-app"
-      },
-      "date": "2023-01",
-      "featured": true,
-      "category": "UX Design"
+      "image": "/images/portfolio-envision.gif",
+      "skills": ["React Native", "Figma", "Firebase", "GraphQL"],
+      "link": "https://github.com/bgun/mobile-app"
     }
   ]
 }

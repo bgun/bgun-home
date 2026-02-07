@@ -6,7 +6,7 @@ const Portfolio = ({ projects }) => {
     <section id="work" className="py-24 bg-white">
       <div className="container-custom">
         <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4 text-center">
-          Selected Work
+          Selected Projects
         </h2>
         <p className="text-xl text-gray-600 mb-16 text-center max-w-2xl mx-auto">
           A collection of projects showcasing product management, engineering leadership, and user experience design

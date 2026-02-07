@@ -1,12 +1,12 @@
 import React from 'react'
 
 const ProjectCard = ({ project }) => {
-  const { title, description, image, technologies, links, date, category } = project
+  const { title, description, image, skills, link, date } = project
 
   return (
     <article className="group bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
       {/* Project Image */}
-      <div className="relative h-64 overflow-hidden bg-gray-200">
+      <div className="relative h-80 overflow-hidden bg-gray-200">
         <img
           src={image}
           alt={title}
@@ -15,11 +15,6 @@ const ProjectCard = ({ project }) => {
             e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23ddd" width="400" height="300"/%3E%3Ctext fill="%23999" x="50%25" y="50%25" text-anchor="middle" dy=".3em" font-size="20"%3EProject Image%3C/text%3E%3C/svg%3E'
           }}
         />
-        <div className="absolute top-4 right-4">
-          <span className="bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-medium text-gray-700">
-            {category}
-          </span>
-        </div>
       </div>
 
       {/* Project Content */}
@@ -28,32 +23,36 @@ const ProjectCard = ({ project }) => {
           <h3 className="text-2xl font-serif font-bold text-gray-900 group-hover:text-primary-600 transition-colors">
             {title}
           </h3>
-          <span className="text-sm text-gray-500 whitespace-nowrap ml-4">
-            {new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'short' })}
-          </span>
+          {date && (
+            <span className="text-sm text-gray-500 whitespace-nowrap ml-4">
+              {new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'short' })}
+            </span>
+          )}
         </div>
 
         <p className="text-gray-700 mb-4 leading-relaxed">
           {description}
         </p>
 
-        {/* Technologies */}
-        <div className="flex flex-wrap gap-2 mb-4">
-          {technologies.map((tech, index) => (
-            <span
-              key={index}
-              className="text-xs bg-gray-100 text-gray-700 px-3 py-1 rounded-full font-medium"
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
+        {/* Skills */}
+        {skills && skills.length > 0 && (
+          <div className="flex flex-wrap gap-2 mb-4">
+            {skills.map((skill, index) => (
+              <span
+                key={index}
+                className="text-xs bg-gray-100 text-gray-700 px-3 py-1 rounded-full font-medium"
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
+        )}
 
         {/* View More Link */}
-        {links && (links.url || links.demo || links.github) && (
+        {link && (
           <div className="pt-4 border-t border-gray-200">
             <a
-              href={links.url || links.demo || links.github}
+              href={link}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-primary-600 hover:text-primary-800 font-semibold transition-colors"
