@@ -14,8 +14,8 @@ const Hero = ({ heroImage, name, bio }) => {
 
       {/* About Text Overlay at Bottom */}
       <div className="absolute bottom-0 left-0 right-0 z-10 bg-gradient-to-t from-black/80 via-black/60 to-transparent">
-        <div className="container-custom max-w-6xl py-12 md:py-16">
-          <p className="text-lg md:text-xl lg:text-2xl leading-relaxed text-white font-serif text-center">
+        <div className="container-custom max-w-5xl py-12 md:py-16">
+          <p className="px-6 text-md md:text-lg lg:text-xl leading-relaxed text-white font-serif text-center">
             {bio}
           </p>
         </div>

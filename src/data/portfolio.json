@@ -1,7 +1,7 @@
 {
   "about": {
     "name": "Ben Gundersen",
-    "title": "Digital Product Developer",
+    "title": "Digital Product Development",
     "bio": "I bridge the gap between technical implementation and user experience, building products that solve real problems at scale. With a background in both engineering and product management, I bring a unique perspective to creating elegant, performant solutions.",
     "email": "ben@bengundersen.com",
     "phone": "918-760-7778",
@@ -17,14 +17,14 @@
       "long_description": "<p>As Technical Manager for Trust &amp; Safety at Tripadvisor, I led engineering efforts for content moderation pipelines, fraud detection, and tooling. <ul><li>Delivered scalable data pipelines for content and user analysis</li><li>Worked cross-functionally with Product and Operations</li><li>Drove roadmapping and technical strategy for key initiatives</li></ul></p>",
       "image": "/images/portfolio-tripadvisor.png",
       "skills": ["Engineering Leadership", "Content Moderation", "Fraud Detection", "Data Pipelines", "Roadmapping"],
-      "link": "https://tripadvisor.com"
+      "link": "https://tripadvisor.com/trust"
     },
     {
       "title": "Afterwork: Social Tools for the Loneliness Epidemic",
       "description": "Afterwork is a network of in-person gatherings, service opportunities and personal development strategies, all centered around the shared experience of midlife.",
       "long_description": "<p>Afterwork creates scalable solutions to address loneliness and foster community for adults. <ul><li>Co-founded and led product development</li><li>Launched AI-driven personal development engines</li><li>Built and marketed a community platform blending events, services, and content</li></ul></p>",
       "image": "/images/portfolio-afterwork.png",
-      "skills": ["Zero-to-one", "Agentic AI", "Email Marketing", "Product Management", "Startups"],
+      "skills": ["Zero-to-one", "Agentic AI", "Fundraising", "Email Marketing", "Product Development", "Startups"],
       "link": "https://wearelifeafterwork.com/ai-engine"
     },
     {
@@ -32,7 +32,7 @@
       "description": "Building a map of the world's places. Acquired by Tripadvisor in 2016.",
       "long_description": "<p>As a founding team member at Citymaps, I helped build a unique crowdsourced mapping platform. <ul><li>Architected interactive map UI and data models using React</li><li>Scaled platform to millions of places globally</li><li>Contributed to successful acquisition by Tripadvisor in 2016</li></ul></p>",
       "image": "/images/portfolio-citymaps.png",
-      "skills": ["Cartography", "Startups", "React"],
+      "skills": ["Digital Cartography", "Engineering Leadership", "Startups", "Javascript", "React", "Scala"],
       "link": "https://tracxn.com/d/companies/citymaps/__V20ADkS6b1gRnihGvYkI2n_UfHhrFyOqgXrhS03zI04"
     },
     {
