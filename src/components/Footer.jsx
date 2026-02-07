@@ -11,7 +11,7 @@ const Footer = ({ contact }) => {
 
     // Using Formspree or similar service - update action URL as needed
     try {
-      const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+      const response = await fetch('https://formsubmit.co/25e52e00fb26130116dbdc604f60419a', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -45,7 +45,7 @@ const Footer = ({ contact }) => {
             </label>
             <input
               type="text"
-              id="name"
+              name="name"
               required
               value={formState.name}
               onChange={(e) => setFormState({ ...formState, name: e.target.value })}
@@ -60,7 +60,7 @@ const Footer = ({ contact }) => {
             </label>
             <input
               type="email"
-              id="email"
+              name="email"
               required
               value={formState.email}
               onChange={(e) => setFormState({ ...formState, email: e.target.value })}
@@ -74,9 +74,9 @@ const Footer = ({ contact }) => {
               Message
             </label>
             <textarea
-              id="message"
+              name="message"
               required
-              rows="5"
+              rows="4"
               value={formState.message}
               onChange={(e) => setFormState({ ...formState, message: e.target.value })}
               className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-primary-500 text-white resize-none"
