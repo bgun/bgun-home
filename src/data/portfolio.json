@@ -1,8 +1,7 @@
 {
   "about": {
     "name": "Ben Gundersen",
-    "title": "Technical Product Manager",
-    "subtitle": "Engineering Leadership & Experience Design",
+    "title": "Digital Product Developer",
     "bio": "I bridge the gap between technical implementation and user experience, building products that solve real problems at scale. With a background in both engineering and product management, I bring a unique perspective to creating elegant, performant solutions.",
     "email": "ben@bengundersen.com",
     "phone": "918-760-7778",
@@ -17,7 +16,7 @@
       "title": "E-Commerce Platform Redesign",
       "description": "Led the redesign of a multi-million dollar e-commerce platform, improving conversion rates by 35% and reducing cart abandonment by 22%.",
       "longDescription": "Comprehensive UX overhaul of legacy e-commerce system serving 500K+ monthly users. Implemented mobile-first design, streamlined checkout flow, and integrated modern payment solutions.",
-      "image": "/images/project-1.jpg",
+      "image": "/images/portfolio-tripadvisor.png",
       "technologies": ["React", "Node.js", "PostgreSQL", "Stripe", "AWS"],
       "links": {
         "demo": "https://example.com",

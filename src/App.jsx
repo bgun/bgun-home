@@ -1,6 +1,8 @@
 import React from 'react'
 import { usePortfolio } from './hooks/usePortfolio'
+import Header from './components/Header'
 import Hero from './components/Hero'
+import ClientLogos from './components/ClientLogos'
 import About from './components/About'
 import Portfolio from './components/Portfolio'
 import Footer from './components/Footer'
@@ -33,17 +35,20 @@ function App() {
 
   return (
     <div className="min-h-screen">
-      <Hero
+      <Header
         name={about.name}
         title={about.title}
         subtitle={about.subtitle}
-        heroImage="/images/Ben_Dining_Room-5.jpg"
       />
+      <Hero
+        heroImage="/images/Ben_Dining_Room-5.jpg"
+        name={about.name}
+      />
+      <ClientLogos />
       <About bio={about.bio} />
       <Portfolio projects={projects} />
       <Footer
-        contact={{ phone: about.phone, email: about.email }}
-        social={about.social}
+        contact={{ email: about.email }}
       />
     </div>
   )

@@ -3,7 +3,7 @@ import ProjectCard from './ProjectCard'
 
 const Portfolio = ({ projects }) => {
   return (
-    <section className="py-24 bg-white">
+    <section id="work" className="py-24 bg-white">
       <div className="container-custom">
         <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4 text-center">
           Selected Work

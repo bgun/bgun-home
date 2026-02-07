@@ -1,59 +1,103 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-const Footer = ({ contact, social }) => {
+const Footer = ({ contact }) => {
+  const [formState, setFormState] = useState({ name: '', email: '', message: '' })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitMessage, setSubmitMessage] = useState('')
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+
+    // Using Formspree or similar service - update action URL as needed
+    try {
+      const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formState),
+      })
+
+      if (response.ok) {
+        setSubmitMessage('Thank you! Your message has been sent.')
+        setFormState({ name: '', email: '', message: '' })
+      } else {
+        setSubmitMessage('Sorry, there was an error. Please try again.')
+      }
+    } catch (error) {
+      setSubmitMessage('Sorry, there was an error. Please try again.')
+    }
+
+    setIsSubmitting(false)
+  }
+
   return (
-    <footer className="bg-gray-900 text-white py-16">
-      <div className="container-custom">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-          {/* Contact Info */}
-          <div className="text-center md:text-left">
-            <h3 className="text-2xl font-serif font-bold mb-4">Get In Touch</h3>
-            <div className="space-y-2">
-              <a
-                href={`tel:${contact.phone.replace(/\D/g, '')}`}
-                className="block text-gray-300 hover:text-white transition-colors text-lg"
-              >
-                {contact.phone}
-              </a>
-              <a
-                href={`mailto:${contact.email}`}
-                className="block text-gray-300 hover:text-white transition-colors text-lg"
-              >
-                {contact.email}
-              </a>
-            </div>
+    <footer id="contact" className="bg-gray-900 text-white py-16">
+      <div className="container-custom max-w-2xl">
+        <h3 className="text-3xl md:text-4xl font-serif font-bold mb-8 text-center">Get In Touch</h3>
+
+        {/* Contact Form */}
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div>
+            <label htmlFor="name" className="block text-sm font-medium mb-2">
+              Name
+            </label>
+            <input
+              type="text"
+              id="name"
+              required
+              value={formState.name}
+              onChange={(e) => setFormState({ ...formState, name: e.target.value })}
+              className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-primary-500 text-white"
+              placeholder="Your name"
+            />
           </div>
 
-          {/* Social Links */}
-          <div className="flex gap-6">
-            <a
-              href={social.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group"
-              aria-label="GitHub"
-            >
-              <img
-                src="/github.svg"
-                alt="GitHub"
-                className="w-12 h-12 opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all"
-              />
-            </a>
-            <a
-              href={social.substack}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group"
-              aria-label="Substack"
-            >
-              <img
-                src="/substack.png"
-                alt="Substack"
-                className="w-12 h-12 opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all"
-              />
-            </a>
+          <div>
+            <label htmlFor="email" className="block text-sm font-medium mb-2">
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              required
+              value={formState.email}
+              onChange={(e) => setFormState({ ...formState, email: e.target.value })}
+              className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-primary-500 text-white"
+              placeholder="your@email.com"
+            />
           </div>
-        </div>
+
+          <div>
+            <label htmlFor="message" className="block text-sm font-medium mb-2">
+              Message
+            </label>
+            <textarea
+              id="message"
+              required
+              rows="5"
+              value={formState.message}
+              onChange={(e) => setFormState({ ...formState, message: e.target.value })}
+              className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-primary-500 text-white resize-none"
+              placeholder="Your message..."
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {isSubmitting ? 'Sending...' : 'Send Message'}
+          </button>
+
+          {submitMessage && (
+            <p className={`text-center ${submitMessage.includes('Thank') ? 'text-green-400' : 'text-red-400'}`}>
+              {submitMessage}
+            </p>
+          )}
+        </form>
 
         {/* Copyright */}
         <div className="mt-12 pt-8 border-t border-gray-800 text-center text-gray-400">
