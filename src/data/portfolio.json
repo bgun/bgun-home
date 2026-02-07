@@ -33,17 +33,17 @@
       "link": "https://tracxn.com/d/companies/citymaps/__V20ADkS6b1gRnihGvYkI2n_UfHhrFyOqgXrhS03zI04#about-the-company"
     },
     {
-      "title": "Data Visualization Dashboard",
-      "description": "Created an interactive analytics dashboard processing 1M+ data points in real-time with custom D3.js visualizations.",
+      "title": "Excel Sports: NCAA Officiating Partner",
+      "description": "Partnering with NCAA to improve officiating efficiency and transparency.",
       "image": "/images/portfolio-ncaa.jpg",
-      "skills": ["React", "D3.js", "Python", "FastAPI", "MongoDB"],
-      "link": "https://example.com"
+      "skills": ["Full Stack", ".NET"],
+      "link": "https://ncaa.com"
     },
     {
-      "title": "Mobile App UX Optimization",
-      "description": "Redesigned mobile app experience resulting in 4.8 star rating (from 3.2) and 200% increase in daily active users.",
+      "title": "Envison Gaming: Creative Direction",
+      "description": "Casino gaming startup",
       "image": "/images/portfolio-envision.gif",
-      "skills": ["React Native", "Figma", "Firebase", "GraphQL"],
+      "skills": ["3D CAD Design", "Consumer Hardware"],
       "link": "https://github.com/bgun/mobile-app"
     }
   ]
