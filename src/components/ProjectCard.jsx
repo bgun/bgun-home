@@ -1,10 +1,13 @@
 import React from 'react'
 
-const ProjectCard = ({ project }) => {
-  const { title, description, image, skills, link, date } = project
+const ProjectCard = ({ project, onClick }) => {
+  const { title, description, image, skills, date } = project
 
   return (
-    <article className="group bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+    <article
+      className="group bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer"
+      onClick={onClick}
+    >
       {/* Project Image */}
       <div className="relative h-80 overflow-hidden bg-gray-200">
         <img
@@ -48,22 +51,6 @@ const ProjectCard = ({ project }) => {
           </div>
         )}
 
-        {/* View More Link */}
-        {link && (
-          <div className="pt-4 border-t border-gray-200">
-            <a
-              href={link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-primary-600 hover:text-primary-800 font-semibold transition-colors"
-            >
-              <span>View More</span>
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
-            </a>
-          </div>
-        )}
       </div>
     </article>
   )

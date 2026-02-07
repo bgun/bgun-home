@@ -2,9 +2,13 @@ import React from 'react'
 
 const Header = ({ name, title, subtitle }) => {
   const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    if (sectionId === 'about') {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    } else {
+      const element = document.getElementById(sectionId)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
     }
   }
 
@@ -35,7 +39,7 @@ const Header = ({ name, title, subtitle }) => {
               onClick={() => scrollToSection('work')}
               className="text-white font-medium hover:text-white/80 transition-colors drop-shadow-md"
             >
-              Work
+              Selected Projects
             </button>
             <button
               onClick={() => scrollToSection('contact')}

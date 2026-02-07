@@ -3,7 +3,6 @@ import { usePortfolio } from './hooks/usePortfolio'
 import Header from './components/Header'
 import Hero from './components/Hero'
 import ClientLogos from './components/ClientLogos'
-import About from './components/About'
 import Portfolio from './components/Portfolio'
 import Footer from './components/Footer'
 
@@ -43,9 +42,9 @@ function App() {
       <Hero
         heroImage="/images/Ben_Dining_Room-5.jpg"
         name={about.name}
+        bio={about.bio}
       />
       <ClientLogos />
-      <About bio={about.bio} />
       <Portfolio projects={projects} />
       <Footer
         contact={{ email: about.email }}

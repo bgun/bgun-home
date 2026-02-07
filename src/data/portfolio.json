@@ -14,36 +14,49 @@
     {
       "title": "Tripadvisor: Trust & Safety Technical Management",
       "description": "Content moderation pipeline and tooling",
+      "long_description": "<p>As Technical Manager for Trust &amp; Safety at Tripadvisor, I led engineering efforts for content moderation pipelines, fraud detection, and tooling. <ul><li>Delivered scalable data pipelines for content and user analysis</li><li>Worked cross-functionally with Product and Operations</li><li>Drove roadmapping and technical strategy for key initiatives</li></ul></p>",
       "image": "/images/portfolio-tripadvisor.png",
-      "skills": ["Engineering Leadership", "Content Management", "Data Pipelines"],
+      "skills": ["Engineering Leadership", "Content Moderation", "Fraud Detection", "Data Pipelines", "Roadmapping"],
       "link": "https://tripadvisor.com"
     },
     {
       "title": "Afterwork: Social Tools for the Loneliness Epidemic",
       "description": "Afterwork is a network of in-person gatherings, service opportunities and personal development strategies, all centered around the shared experience of midlife.",
+      "long_description": "<p>Afterwork creates scalable solutions to address loneliness and foster community for adults. <ul><li>Co-founded and led product development</li><li>Launched AI-driven personal development engines</li><li>Built and marketed a community platform blending events, services, and content</li></ul></p>",
       "image": "/images/portfolio-afterwork.png",
-      "skills": ["Digital Marketing", "Product Management", "Startups"],
+      "skills": ["Zero-to-one", "Agentic AI", "Email Marketing", "Product Management", "Startups"],
       "link": "https://wearelifeafterwork.com/ai-engine"
     },
     {
       "title": "Citymaps: Mapping the World's Places",
       "description": "Building a map of the world's places. Acquired by Tripadvisor in 2016.",
+      "long_description": "<p>As a founding team member at Citymaps, I helped build a unique crowdsourced mapping platform. <ul><li>Architected interactive map UI and data models using React</li><li>Scaled platform to millions of places globally</li><li>Contributed to successful acquisition by Tripadvisor in 2016</li></ul></p>",
       "image": "/images/portfolio-citymaps.png",
-      "skills": ["Cartography", "Startups"],
-      "link": "https://tracxn.com/d/companies/citymaps/__V20ADkS6b1gRnihGvYkI2n_UfHhrFyOqgXrhS03zI04#about-the-company"
+      "skills": ["Cartography", "Startups", "React"],
+      "link": "https://tracxn.com/d/companies/citymaps/__V20ADkS6b1gRnihGvYkI2n_UfHhrFyOqgXrhS03zI04"
+    },
+    {
+      "title": "Free Gaza Circus",
+      "description": "Website and digital marketing support for Palestine-based nonprofit.",
+      "long_description": "<p><strong>Free Gaza Circus</strong> is a Palestine-based nonprofit circus school providing performances, workshops, and a sense of purpose and activism. <ul><li>Pro bono support for the Squarespace web presence.</li></ul></p>",
+      "image": "/images/portfolio-freegazacircus.png",
+      "skills": ["Squarespace", "Digital Activism", "Community Engagement", "Web Design"],
+      "link": "https://freegazacircus.org"
     },
     {
       "title": "Excel Sports: NCAA Officiating Partner",
-      "description": "Partnering with NCAA to improve officiating efficiency and transparency.",
+      "description": "Partnered with NCAA to improve officiating efficiency and transparency.",
+      "long_description": "<p>Led engineering for an NCAA officiating technology platform. <ul><li>Designed secure systems for game oversight</li><li>Built reporting and analysis tools (using .NET stack)</li><li>Collaborated with NCAA and Excel Sports leadership for process improvement</li></ul></p>",
       "image": "/images/portfolio-ncaa.jpg",
-      "skills": ["Full Stack", ".NET"],
+      "skills": ["Full Stack", "Microsoft .NET", "SQL"],
       "link": "https://ncaa.com"
     },
     {
       "title": "Envison Gaming: Creative Direction",
       "description": "Casino gaming startup",
+      "long_description": "<p>Creative lead at Envision Gaming, a hardware and software casino product startup. <ul><li>Directed 3D CAD design for consumer hardware</li><li>Oversaw prototyping and industrial design</li><li>Launched MVP and mobile applications on a limited team</li></ul></p>",
       "image": "/images/portfolio-envision.gif",
-      "skills": ["3D CAD Design", "Consumer Hardware"],
+      "skills": ["Art Direction", "3D/CAD", "Cabinet Hardware"],
       "link": "https://github.com/bgun/mobile-app"
     }
   ]

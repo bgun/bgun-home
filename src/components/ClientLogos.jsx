@@ -14,7 +14,7 @@ const ClientLogos = () => {
     <section className="py-16 bg-white border-b border-gray-200">
       <div className="container-custom">
         <h2 className="text-2xl md:text-3xl font-serif font-bold text-center mb-12 text-gray-800">
-          Companies I've worked for and with
+          Organizations I've worked for and with
         </h2>
 
         {/* Desktop: Grid Layout */}

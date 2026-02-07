@@ -29,4 +29,18 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+
+  /* Prose styles for modal HTML content */
+  .prose ul {
+    @apply list-disc list-inside mt-2 mb-4 space-y-1;
+  }
+  .prose li {
+    @apply text-gray-700;
+  }
+  .prose p {
+    @apply mb-4;
+  }
+  .prose strong {
+    @apply font-semibold text-gray-900;
+  }
 }
