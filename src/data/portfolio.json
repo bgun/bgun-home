@@ -15,25 +15,22 @@
       "title": "Tripadvisor: Trust & Safety Technical Management",
       "description": "Content moderation pipeline and tooling",
       "image": "/images/portfolio-tripadvisor.png",
-      "skills": ["React", "Node.js", "PostgreSQL", "Stripe", "AWS"],
-      "link": "https://tripadvisor.com",
-      "date": "2024-03"
+      "skills": ["Engineering Leadership", "Content Management", "Data Pipelines"],
+      "link": "https://tripadvisor.com"
     },
     {
-      "title": "Afterwork: Solving the Loneliness Epidemic",
+      "title": "Afterwork: Social Tools for the Loneliness Epidemic",
       "description": "Afterwork is a network of in-person gatherings, service opportunities and personal development strategies, all centered around the shared experience of midlife.",
       "image": "/images/portfolio-afterwork.png",
-      "skills": ["Digital Marketing", "TensorFlow", "scikit-learn", "AWS Lambda", "Docker"],
-      "link": "https://wearelifeafterwork.com/ai-engine",
-      "date": "2022-08"
+      "skills": ["Digital Marketing", "Product Management", "Startups"],
+      "link": "https://wearelifeafterwork.com/ai-engine"
     },
     {
-      "title": "Real-Time Collaboration Tool",
-      "description": "Built a real-time collaboration platform for distributed teams, supporting 10,000+ concurrent users with sub-100ms latency.",
+      "title": "Citymaps: Mapping the World's Places",
+      "description": "Building a map of the world's places. Acquired by Tripadvisor in 2016.",
       "image": "/images/portfolio-citymaps.png",
-      "skills": ["TypeScript", "WebSocket", "Redis", "Docker", "Kubernetes"],
-      "link": "https://example.com",
-      "date": "2023-11"
+      "skills": ["Cartography", "Startups"],
+      "link": "https://tracxn.com/d/companies/citymaps/__V20ADkS6b1gRnihGvYkI2n_UfHhrFyOqgXrhS03zI04#about-the-company"
     },
     {
       "title": "Data Visualization Dashboard",
