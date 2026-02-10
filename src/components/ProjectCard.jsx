@@ -5,7 +5,7 @@ const ProjectCard = ({ project, onClick }) => {
 
   return (
     <article
-      className="group bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer"
+      className="group bg-white overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer"
       onClick={onClick}
     >
       {/* Project Image */}

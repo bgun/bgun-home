@@ -1,18 +1,25 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const ProjectModal = ({ project, isOpen, onClose }) => {
+  const [isAnimating, setIsAnimating] = useState(false)
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden'
+      // Trigger animation after mount
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setIsAnimating(true)
+        })
+      })
     } else {
+      setIsAnimating(false)
       document.body.style.overflow = 'unset'
     }
     return () => {
       document.body.style.overflow = 'unset'
     }
   }, [isOpen])
-
-  if (!isOpen || !project) return null
 
   const getDomain = (url) => {
     if (!url) return ''
@@ -24,13 +31,19 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
     }
   }
 
+  if (!project) return null
+
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+      className={`fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 transition-all duration-300 ${
+        isOpen && isAnimating ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+      }`}
       onClick={onClose}
     >
       <div
-        className="relative bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+        className={`relative bg-white max-w-4xl w-full max-h-[90vh] overflow-y-auto transition-all duration-300 ${
+          isOpen && isAnimating ? 'scale-100 opacity-100' : 'scale-75 opacity-0'
+        }`}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
@@ -45,7 +58,7 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
         </button>
 
         {/* Project Image */}
-        <div className="relative h-64 md:h-96 overflow-hidden bg-gray-200 rounded-t-lg">
+        <div className="relative h-64 md:h-96 overflow-hidden bg-gray-200">
           <img
             src={project.image}
             alt={project.title}
