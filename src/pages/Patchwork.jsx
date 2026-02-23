@@ -31,16 +31,20 @@ const Patchwork = () => {
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
       <div className="max-w-lg w-full text-center py-16">
-        <a href="/" className="text-sm font-sans text-primary-600 hover:text-primary-700 transition-colors">
-          &larr; bgun.me
-        </a>
 
-        <h1 className="text-5xl md:text-6xl font-serif font-bold text-gray-900 mt-6 mb-4">
+        <h1 className="text-5xl md:text-6xl font-serif font-bold text-gray-900 mt-6 mb-1">
           Patchwork
         </h1>
+        <h2 className="text-xl md:text-xl font-serif font-bold text-gray-900 mt-1 mb-4">
+          by Ben Gundersen
+        </h2>
 
-        <p className="text-lg text-gray-600 font-sans leading-relaxed mb-10">
-          A weekly newsletter helping creative weirdos find cause-centric hybrid/remote work, fractional work, and career building opportunities. Delivered every Monday.
+        <p className="text-lg text-gray-600 font-sans leading-relaxed mb-3">
+          A weekly newsletter of job listings for creative weirdos: cause-centric, fractional, freelance, remote, and career building opportunities. Delivered every Monday.
+        </p>
+        <p className="text-sm text-gray-600 font-sans leading-relaxed mb-6">
+          Got an opportunity that might interest 200+ creative weirdos<br />
+          (mostly NYC+nomads)? <a href="mailto:ben@bengundersen.com?subject=Patchwork%20Opportunity" className="text-primary-600 hover:text-primary-700 transition-colors underline">Send it here</a>.
         </p>
 
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
