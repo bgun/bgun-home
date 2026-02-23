@@ -18,7 +18,7 @@ const Portfolio = ({ projects }) => {
 
   return (
     <>
-      <section id="work" className="py-24 bg-white">
+      <section id="work" className="py-24 bg-zinc-200">
         <div className="container-custom">
           <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4 text-center">
             Selected Projects

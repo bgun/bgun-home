@@ -11,7 +11,7 @@ const ClientLogos = () => {
   ]
 
   return (
-    <section className="py-16 bg-white border-b border-gray-200">
+    <section className="py-12 bg-zinc-100 border-b border-gray-200">
       <div className="container-custom">
         <h2 className="text-2xl md:text-3xl font-serif font-bold text-center mb-12 text-gray-800">
           Organizations I've worked for and with
