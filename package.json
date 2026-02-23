@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && mkdir -p docs/patchwork && mv docs/patchwork.html docs/patchwork/index.html",
     "lint": "eslint .",
     "preview": "vite preview"
   },
