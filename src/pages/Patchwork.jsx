@@ -29,7 +29,7 @@ const Patchwork = () => {
   }, [])
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4 relative overflow-hidden">
+    <div className="min-h-screen bg-zinc-100 flex items-center justify-center px-4 relative overflow-hidden">
       <img
         src="/images/needle.png"
         alt=""
@@ -45,7 +45,7 @@ const Patchwork = () => {
         </h2>
 
         <p className="text-lg text-gray-600 font-sans leading-relaxed mb-3">
-          A weekly newsletter of job listings for creative weirdos: cause-centric, fractional, freelance, remote, and career building opportunities. Delivered every Monday.
+          Weekly job listings for creatives who care. Fractional, freelance, and remote roles in design, tech, health, and the public good. Delivered every Monday.
         </p>
         <p className="text-sm text-gray-600 font-sans leading-relaxed mb-6">
           Got an opportunity that might interest 200+ creative weirdos<br />

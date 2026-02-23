@@ -13,9 +13,9 @@ const Header = ({ name, title, subtitle }) => {
   }
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-black/30 backdrop-blur-sm">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-black/50 backdrop-blur-md">
       <div className="container-custom">
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between py-4 gap-4">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between py-4 gap-4 max-w-[60vw] mx-auto">
           {/* Name and Title */}
           <div className="text-center md:text-left">
             <h1 className="text-2xl md:text-3xl font-serif font-bold text-white drop-shadow-lg">
