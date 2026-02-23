@@ -29,8 +29,13 @@ const Patchwork = () => {
   }, [])
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
-      <div className="max-w-lg w-full text-center py-16">
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4 relative overflow-hidden">
+      <img
+        src="/images/needle.png"
+        alt=""
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-48 md:w-64 opacity-20 pointer-events-none select-none"
+      />
+      <div className="max-w-lg w-full text-center py-16 relative z-10">
 
         <h1 className="text-5xl md:text-6xl font-serif font-bold text-gray-900 mt-6 mb-1">
           Patchwork
